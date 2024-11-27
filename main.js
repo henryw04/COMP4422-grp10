@@ -14,10 +14,13 @@ document.body.appendChild( renderer.domElement );
 
 new OrbitControls(camera,renderer.domElement);
 
-const geometry = new THREE.IcosahedronGeometry( 1,16);
+const loader = new THREE.TextureLoader();
+
+const geometry = new THREE.IcosahedronGeometry(1,12);
 const material = new THREE.MeshBasicMaterial( { 
-	color: 0xffff00, 
+	map: loader.load("./textures/earthmap1k.jpg"), 
 } );
+
 const cube = new THREE.Mesh( geometry, material );
 scene.add( cube );
 
