@@ -35,7 +35,7 @@ const sun = new THREE.Mesh(sungeometry,sunmat)
 scene.add(sun);
 
 //sunlight
-const plight = new THREE.PointLight( 0xffffff, 100, 100, 1 );
+const plight = new THREE.PointLight( 0xffffff, 30, 150, 0.5 );
 plight.castShadow=true;
 scene.add( plight );
 //light up all the planet a bit
