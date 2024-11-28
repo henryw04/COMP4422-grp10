@@ -29,9 +29,18 @@ const uranustexture = loader.load('./textures/uranus2k.jpg');
 const neptunetexture = loader.load('./textures/neptune2k.jpg');
 
 //create sun
-const sun = CreatePlanet(10,suntexture);
+var sungeometry = new THREE.SphereGeometry(10,50,50);
+var sunmat = new THREE.MeshBasicMaterial({map: suntexture})
+const sun = new THREE.Mesh(sungeometry,sunmat)
 scene.add(sun);
 
+//sunlight
+const plight = new THREE.PointLight( 0xffffff, 100, 100, 1 );
+plight.castShadow=true;
+scene.add( plight );
+//light up all the planet a bit
+const al = new THREE.AmbientLight(0xffffff, 0.1);
+scene.add(al);
 
 const mercury = CreatePlanet(1.2,mercurytexture,15,-0.03);
 const venus = CreatePlanet(2.7,venuxtexture,22,-2.64);
@@ -61,30 +70,33 @@ scene.add(saturngrp);
 scene.add(uranusgrp);
 scene.add(neptunegrp);
 
+
+const earthspeed = 0.01;
+var scale=100;
 function animate() {
-	mercury.rotateY(0.01/58.65);
-	mercurygrp.rotateY(0.041477);
+	mercury.rotateY(earthspeed/58.65*scale);
+	mercurygrp.rotateY(earthspeed/88*scale);
 
-	venus.rotateY(-0.01/243);
-	venusgrp.rotateY(0.016222);
+	venus.rotateY(-earthspeed/243*scale);
+	venusgrp.rotateY(earthspeed/225*scale);
 
-	earth.rotateY(0.01);
-	earthgrp.rotateY(0.01);
+	earth.rotateY(earthspeed*scale);
+	earthgrp.rotateY(earthspeed/365*scale);
 
-	mars.rotateY(0.01);
-	marsgrp.rotateY(0.00531);
+	mars.rotateY(earthspeed/1.03*scale);
+	marsgrp.rotateY(earthspeed/687*scale);
 
-	jupiter.rotateY(0.0242);
-	jupitergrp.rotateY(0.0008333);
+	jupiter.rotateY(earthspeed*(24/9.9)*scale);
+	jupitergrp.rotateY(earthspeed/4333*scale);
 
-	saturn.rotateY(0.02243);
-	saturngrp.rotateY(0.00034014);
+	saturn.rotateY(earthspeed*(24/10.7)*scale);
+	saturngrp.rotateY(earthspeed/10756*scale);
 
-	uranus.rotateY(0.01393);
-	uranusgrp.rotateY(0.00011905);
+	uranus.rotateY(earthspeed*(24/17.3)*scale);
+	uranusgrp.rotateY(earthspeed/30687*scale);
 
-	neptune.rotateY(0.014906);
-	neptunegrp.rotateY(0.00006061);
+	neptune.rotateY(earthspeed*(24/16.1)*scale);
+	neptunegrp.rotateY(earthspeed/60190*scale);
 
 	renderer.render(scene, camera);
 
