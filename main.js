@@ -4,7 +4,7 @@ import {CreatePlanet,CreateGrp} from './lib/Planets.js';
 
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera( 90, window.innerWidth / window.innerHeight, 0.1, 4000 );
-camera.position.z = 90;
+camera.position.set(0,10,90) ;
 
 
 const renderer = new THREE.WebGLRenderer({antialias: true});
@@ -72,8 +72,20 @@ scene.add(neptunegrp);
 
 
 const earthspeed = 0.01;
-var scale=100;
+
+var slider = document.getElementById("speed");
+var scale = 100;
+slider.oninput = function() {
+  scale = Number(this.value);
+}
+var sliderbut = document.getElementById("sliderbutton");
+sliderbut.onclick = function(){
+	slider.value=100;
+	scale=100;
+}
+
 function animate() {
+	renderer.setAnimationLoop(animate);
 	mercury.rotateY(earthspeed/58.65*scale);
 	mercurygrp.rotateY(earthspeed/88*scale);
 
@@ -101,4 +113,5 @@ function animate() {
 	renderer.render(scene, camera);
 
 }
-renderer.setAnimationLoop(animate);
+
+animate()

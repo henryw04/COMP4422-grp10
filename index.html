@@ -3,26 +3,26 @@
 	<head>
 		
     <meta charset="utf-8">
-		
+		<link rel="stylesheet" href="styles.css">
     <title>solar system</title>
 		
     <style>
-			body { margin: 0; }
+		
 		</style>
     
-    <script type="importmap">
-    {
-      "imports": {
-          "three/addons/": 
-        "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
-      }
-    }
-    </script>
-	
   </head>
 	
   <body>
-		
+    
+  <div id="vertical-flex">
+    <div id="horizon-flex">
+      <div class="slider">
+        <label for="speed">Speed</label>
+        <input type="range" id="speed" min="1" value="100" max="1000">
+      </div>
+      <button id="sliderbutton">Default</button>
+    </div>  
+  </div>
     <script type="module" src="main.js"></script>
   
   </body>
