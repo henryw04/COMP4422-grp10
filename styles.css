@@ -25,6 +25,8 @@ body {
 #horizon-flex{
     display:flex;
     flex-direction:row;
+    width: 60px;
+    height: 40px;
 }
 
 
@@ -32,7 +34,7 @@ body {
     padding: 6px ;
 }
 
-#sliderbutton{
+.button{
     background-color: rgb(0, 0, 61);
     color: white;
     border-radius:5px;

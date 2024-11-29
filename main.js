@@ -39,7 +39,8 @@ const plight = new THREE.PointLight( 0xffffff, 30, 150, 0.5 );
 plight.castShadow=true;
 scene.add( plight );
 //light up all the planet a bit
-const al = new THREE.AmbientLight(0xffffff, 0.1);
+var ambient = 0.1;
+const al = new THREE.AmbientLight(0xffffff, ambient);
 scene.add(al);
 
 const mercury = CreatePlanet(1.2,mercurytexture,15,-0.03);
@@ -73,15 +74,27 @@ scene.add(neptunegrp);
 
 const earthspeed = 0.01;
 
-var slider = document.getElementById("speed");
+var speedslider = document.getElementById("speed");
 var scale = 100;
-slider.oninput = function() {
+speedslider.oninput = function() {
   scale = Number(this.value);
 }
-var sliderbut = document.getElementById("sliderbutton");
-sliderbut.onclick = function(){
-	slider.value=100;
+var speedsliderbut = document.getElementById("sliderbutton");
+speedsliderbut.onclick = function(){
+	speedslider.value=100;
 	scale=100;
+}
+
+var ambientslider = document.getElementById("ambient");
+ambientslider.oninput = function() {
+  ambient = Number(this.value)/10;
+  al.intensity=ambient;
+}
+var ambientsliderbut = document.getElementById("ambientbutton");
+ambientsliderbut.onclick = function(){
+	ambientslider.value=1;	
+	ambient=0.1;
+	al.intensity=ambient;
 }
 
 function animate() {
