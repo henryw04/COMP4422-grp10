@@ -13,7 +13,7 @@ renderer.setSize( window.innerWidth, window.innerHeight );
 
 document.body.appendChild( renderer.domElement );
 
-new OrbitControls(camera,renderer.domElement);
+const control=new OrbitControls(camera,renderer.domElement);
 
 const loader = new THREE.TextureLoader();
 
@@ -101,9 +101,14 @@ ambientsliderbut.onclick = function(){
 }
 //slider reaction end//
 
+
+
 function animate() {
 	renderer.setAnimationLoop(animate); //recursion
+
 	
+	
+
 	//rotation animation//
 	mercury.rotateY(earthspeed/58.65*scale);
 	mercurygrp.rotateY(earthspeed/88*scale);
@@ -129,6 +134,8 @@ function animate() {
 	neptune.rotateY(earthspeed*(24/16.1)*scale);
 	neptunegrp.rotateY(earthspeed/60190*scale);
 	//end rotation//
+
+	control.update();
 
 	renderer.render(scene, camera);//rendering
 }
