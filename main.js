@@ -43,7 +43,8 @@ var ambient = 0.1;
 const al = new THREE.AmbientLight(0xffffff, ambient);
 scene.add(al);
 
-const mercury = CreatePlanet(1.2,mercurytexture,15,-0.03);
+//planet creation
+const mercury = CreatePlanet(1.2,mercurytexture,15,-0.03); //size, loader with texture ,x offset, tilt angle
 const venus = CreatePlanet(2.7,venuxtexture,22,-2.64);
 const earth = CreatePlanet(3,earthtexture,30,-23.44);
 const mars = CreatePlanet(1.66,marstexture,38,-25.19);
@@ -52,6 +53,7 @@ const saturn = CreatePlanet(9,saturntexture,85,-26.73);
 const uranus = CreatePlanet(4,uranustexture,105,-97.77);
 const neptune = CreatePlanet(5,neptunetexture,120,-28.32);
 
+//add planet to a group
 const mercurygrp = CreateGrp(mercury);
 const venusgrp = CreateGrp(venus);
 const earthgrp = CreateGrp(earth);
@@ -61,7 +63,7 @@ const saturngrp = CreateGrp(saturn);
 const uranusgrp = CreateGrp(uranus);
 const neptunegrp = CreateGrp(neptune);
 
-
+//displaying
 scene.add(mercurygrp);
 scene.add(venusgrp);
 scene.add(earthgrp);
@@ -73,9 +75,10 @@ scene.add(neptunegrp);
 
 
 const earthspeed = 0.01;
-
-var speedslider = document.getElementById("speed");
 var scale = 100;
+
+//slider reaction//
+var speedslider = document.getElementById("speed");
 speedslider.oninput = function() {
   scale = Number(this.value);
 }
@@ -96,9 +99,12 @@ ambientsliderbut.onclick = function(){
 	ambient=0.1;
 	al.intensity=ambient;
 }
+//slider reaction end//
 
 function animate() {
-	renderer.setAnimationLoop(animate);
+	renderer.setAnimationLoop(animate); //recursion
+	
+	//rotation animation//
 	mercury.rotateY(earthspeed/58.65*scale);
 	mercurygrp.rotateY(earthspeed/88*scale);
 
@@ -122,9 +128,9 @@ function animate() {
 
 	neptune.rotateY(earthspeed*(24/16.1)*scale);
 	neptunegrp.rotateY(earthspeed/60190*scale);
+	//end rotation//
 
-	renderer.render(scene, camera);
-
+	renderer.render(scene, camera);//rendering
 }
 
 animate()
