@@ -2,18 +2,28 @@ import * as THREE from './lib/three-module.js';
 import {OrbitControls} from './lib/OrbitControls.js';
 import {CreatePlanet,CreateGrp} from './lib/Planets.js';
 
+const renderer = new THREE.WebGLRenderer();
+renderer.setSize( window.innerWidth, window.innerHeight);
+
 const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera( 90, window.innerWidth / window.innerHeight, 0.1, 4000 );
-camera.position.set(0,10,90) ;
+const camera = new THREE.PerspectiveCamera(
 
+ 	90, //fov
+	window.innerWidth / window.innerHeight, //aspect
+	0.1, //near plane
+	1000 //far plane
+);
 
-const renderer = new THREE.WebGLRenderer({antialias: true});
-renderer.setSize( window.innerWidth, window.innerHeight );
+const orbit=new OrbitControls(camera,renderer.domElement);
+camera.position.set(0,100,0);
 
+orbit.update();
+
+//added axixhelper
+const axisHelper = new THREE.AxesHelper(500);
+scene.add(axisHelper);
 
 document.body.appendChild( renderer.domElement );
-
-const control=new OrbitControls(camera,renderer.domElement);
 
 const loader = new THREE.TextureLoader();
 
@@ -73,8 +83,7 @@ scene.add(saturngrp);
 scene.add(uranusgrp);
 scene.add(neptunegrp);
 
-
-const earthspeed = 0.01;
+const earthspeed = 0.003;
 var scale = 100;
 
 //slider reaction//
@@ -104,12 +113,10 @@ ambientsliderbut.onclick = function(){
 
 
 function animate() {
-	renderer.setAnimationLoop(animate); //recursion
+	//each frame//
+	//start rotations//
+	sun.rotateY(earthspeed/27*scale);
 
-	
-	
-
-	//rotation animation//
 	mercury.rotateY(earthspeed/58.65*scale);
 	mercurygrp.rotateY(earthspeed/88*scale);
 
@@ -135,9 +142,7 @@ function animate() {
 	neptunegrp.rotateY(earthspeed/60190*scale);
 	//end rotation//
 
-	control.update();
 
-	renderer.render(scene, camera);//rendering
+	renderer.render(scene, camera);//render//
 }
-
-animate()
+renderer.setAnimationLoop(animate);
