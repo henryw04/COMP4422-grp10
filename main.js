@@ -19,7 +19,10 @@ camera.position.set(0,100,0);
 
 orbit.update();
 
-//added axixhelper
+//added axixhelper 
+//red is x 
+//green is y 
+//blue is z
 const axisHelper = new THREE.AxesHelper(500);
 scene.add(axisHelper);
 
