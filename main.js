@@ -15,6 +15,7 @@ document.body.appendChild( renderer.domElement );
 
 const control=new OrbitControls(camera,renderer.domElement);
 
+
 const loader = new THREE.TextureLoader();
 
 //preload texture
@@ -27,6 +28,9 @@ const jupitertexture = loader.load('./textures/jupiter8k.jpg');
 const saturntexture = loader.load('./textures/saturn8k.jpg');
 const uranustexture = loader.load('./textures/uranus2k.jpg');
 const neptunetexture = loader.load('./textures/neptune2k.jpg');
+const deathstartexture = loader.load('./textures/death_star.jpg');
+
+
 
 //create sun
 var sungeometry = new THREE.SphereGeometry(10,50,50);
@@ -53,6 +57,24 @@ const saturn = CreatePlanet(9,saturntexture,85,-26.73);
 const uranus = CreatePlanet(4,uranustexture,105,-97.77);
 const neptune = CreatePlanet(5,neptunetexture,120,-28.32);
 
+//deathstar
+var deathstargeometry = new THREE.SphereGeometry(1,50,50);
+var deathstarmat = new THREE.MeshPhongMaterial({map: deathstartexture})
+var deathstar = new THREE.Mesh(deathstargeometry, deathstarmat);
+deathstar.position.set(0,-0.5,20);
+deathstar.rotateY(Math.PI*5/6);
+
+//create deathstar beam
+//max beam height should be 10
+const beamgeometry = new THREE.CylinderGeometry(0.1,0.1,10,32); 
+const beammat = new THREE.MeshStandardMaterial({color: 0x15ff00},{emissive: 0x15ff00});
+beammat.emissive.set(0x15ff00);
+var beam = new THREE.Mesh(beamgeometry, beammat);
+beam.position.set(0,-0.1,15);
+beam.rotateX(Math.PI/2);
+
+scene.add(beam);
+
 //add planet to a group
 const mercurygrp = CreateGrp(mercury);
 const venusgrp = CreateGrp(venus);
@@ -72,6 +94,7 @@ scene.add(jupitergrp);
 scene.add(saturngrp);
 scene.add(uranusgrp);
 scene.add(neptunegrp);
+scene.add(deathstar);
 
 
 const earthspeed = 0.01;
