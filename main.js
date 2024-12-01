@@ -201,7 +201,7 @@ ambientsliderbut.onclick = function(){
 const shootbut = document.getElementById("beambutton");
 
 shootbut.onclick = function(){
-	beam.visible = !(beam.visible);
+	beam.visible = true;
 	setTimeout(() => {
         alert('Congratulations!!! You have destroyed the solar system! BOMMMM 💥💥💥💥💥💥💥💥💥');
     }, 10);
