@@ -199,11 +199,13 @@ ambientsliderbut.onclick = function(){
 
 //death star shoot//
 const shootbut = document.getElementById("beambutton");
+
 shootbut.onclick = function(){
 	beam.visible = !(beam.visible);
 	setTimeout(() => {
         alert('Congratulations!!! You have destroyed the solar system! BOMMMM 💥💥💥💥💥💥💥💥💥');
     }, 10);
+	//you are now
 }
 
 var earthspeed = 0.001;
@@ -275,25 +277,8 @@ function animate() {
 	//moon rotation
 	ball.position.x = 4 * Math.cos(moonratio*angle);
     ball.position.y = 4 * Math.sin(moonratio*angle);
-
 	
 	angle += scale/10000;
-	
-	/* beam.position.z -= 1.8;
-
-	if(beam.position.z < 0){
-		beam.position.z = 19;
-	}
-	
-	beam2.position.z -= 2;
-
-	if(beam2.position.z < 0){
-		beam2.position.z = 18;
-	} */
-	
-	//control.update();
-
-
 	renderer.render(scene, camera);//render//
 }
 
