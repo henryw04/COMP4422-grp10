@@ -1,6 +1,6 @@
 import * as THREE from './lib/three-module.js';
 import {OrbitControls} from './lib/OrbitControls.js';
-import {CreatePlanet,CreateGrp} from './lib/Planets.js';
+
 
 const renderer = new THREE.WebGLRenderer();
 renderer.setSize( window.innerWidth, window.innerHeight);
@@ -12,7 +12,21 @@ function PointToSun(Mesh) {
 	Mesh.quaternion.setFromUnitVectors(UpDirection, directionToOrigin);
 	return null;
 }
+function CreatePlanet(radius,texture,x,tilt){
+    var geometry = new THREE.SphereGeometry(radius,50,50);
+    var material = new THREE.MeshPhongMaterial({ 
+	    map: texture 
+    });
+    var PlanetMesh =  new THREE.Mesh(geometry, material);
+    PlanetMesh.castShadow =true;
+    PlanetMesh.receiveShadow =true;
+    PlanetMesh.position.x = x;
 
+    if (tilt){
+        PlanetMesh.rotation.z = Math.PI * tilt / 180;
+    }
+    return PlanetMesh;
+}
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(
 
@@ -31,8 +45,8 @@ orbit.update();
 //red is x 
 //green is y 
 //blue is z
-const axisHelper = new THREE.AxesHelper(500);
-scene.add(axisHelper);
+//const axisHelper = new THREE.AxesHelper(500);
+//scene.add(axisHelper);
 
 document.body.appendChild( renderer.domElement );
 
@@ -187,6 +201,9 @@ ambientsliderbut.onclick = function(){
 const shootbut = document.getElementById("beambutton");
 shootbut.onclick = function(){
 	beam.visible = !(beam.visible);
+	setTimeout(() => {
+        alert('Congratulations!!! You have destroyed the solar system! BOMMMM 💥💥💥💥💥💥💥💥💥');
+    }, 10);
 }
 
 var earthspeed = 0.001;
