@@ -207,7 +207,7 @@ function animate() {
 		beam2.position.z = 18;
 	}
 	
-	control.update();
+	//control.update();
 
 
 	renderer.render(scene, camera);//render//
